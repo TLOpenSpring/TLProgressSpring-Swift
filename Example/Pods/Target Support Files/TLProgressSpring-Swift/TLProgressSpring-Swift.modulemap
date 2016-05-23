@@ -1,0 +1,6 @@
+framework module TLProgressSpring_Swift {
+  umbrella header "TLProgressSpring-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
