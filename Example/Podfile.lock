@@ -1,5 +1,5 @@
 PODS:
-  - TLProgressSpring-Swift (0.1.0)
+  - TLProgressSpring-Swift (1.0.0)
 
 DEPENDENCIES:
   - TLProgressSpring-Swift (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  TLProgressSpring-Swift: fd17ac91b2373e5f0ffab42e8a5ee8d7002a9118
+  TLProgressSpring-Swift: b0a9a3f90c5235e9ed94fc873615ac103991b11e
 
 COCOAPODS: 0.39.0

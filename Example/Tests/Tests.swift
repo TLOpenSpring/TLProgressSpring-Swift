@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import TLProgressSpring-Swift
+import TLProgressSpring_Swift
 
 class Tests: XCTestCase {
     
