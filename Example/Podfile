@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TLProgressSpring-Swift_Example' do
+  pod 'TLProgressSpring-Swift', :path => '../'
+
+  target 'TLProgressSpring-Swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
