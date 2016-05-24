@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class TLProgressView: NSObject {
+public class TLProgressView: UIView {
 
-    var dd:Float
+    
     /**
      设置动画效果
      
@@ -21,7 +21,5 @@ public class TLProgressView: NSObject {
     
     }
     
-    init(test:Float) {
-        self.dd = test;
-    }
+ 
 }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@objc
 public protocol TLSTOPProtocol : AnyObject{
     /**
      *  控制动画是否可以停止
@@ -18,7 +19,8 @@ public protocol TLSTOPProtocol : AnyObject{
      设置mayStop YES,则显示停止按钮
      设置mayStop NO, 则显示隐藏按钮
      */
-    var stopButton:UIButton{get set}
     
+    optional
+    var stopButton:UIButton?{get set}
     
 }

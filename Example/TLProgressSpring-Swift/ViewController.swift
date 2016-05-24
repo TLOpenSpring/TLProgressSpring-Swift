@@ -17,7 +17,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var tableview:UITableView?
     var arrayData:Array<String>{
-        return ["普通转轮"];
+        return ["普通转轮","导航栏进度条","圆环进度条"];
     }
     
 
@@ -56,12 +56,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var vc=TLActivityIndicatorController();
+        var vc=UIViewController();
         
         switch indexPath.row {
         case 0:
             vc = TLActivityIndicatorController()
             break;
+        case 1:
+            vc=TLNavProgressController()
+            break;
+        case 2:
+            vc=TLCircleController()
+            break
         default:
             break;
         }

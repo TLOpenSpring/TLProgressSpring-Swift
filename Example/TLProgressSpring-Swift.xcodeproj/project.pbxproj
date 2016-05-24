@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491061BD1CF3FC8C00AD4B5A /* TLNavProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */; };
+		491061BF1CF44C9E00AD4B5A /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061BE1CF44C9E00AD4B5A /* ColorUtil.swift */; };
+		491061C11CF4623A00AD4B5A /* TLCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061C01CF4623A00AD4B5A /* TLCircleController.swift */; };
 		49589B6A1CF2CF9800E1C001 /* TLActivityIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */; };
 		49589B6C1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -31,6 +34,9 @@
 /* Begin PBXFileReference section */
 		11C122E92871AC59436B1090 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		305718BC0D2BD51C55CCE4AF /* Pods-TLProgressSpring-Swift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLProgressSpring-Swift_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TLProgressSpring-Swift_Example/Pods-TLProgressSpring-Swift_Example.release.xcconfig"; sourceTree = "<group>"; };
+		491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLNavProgressController.swift; sourceTree = "<group>"; };
+		491061BE1CF44C9E00AD4B5A /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
+		491061C01CF4623A00AD4B5A /* TLCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCircleController.swift; sourceTree = "<group>"; };
 		49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLActivityIndicatorController.swift; sourceTree = "<group>"; };
 		49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TLProgressSpring_Swift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/TLProgressSpring-Swift-fgftvqsgtrfbzgcfesubccvqomnj/Build/Products/Debug-iphoneos/TLProgressSpring_Swift.framework"; sourceTree = "<group>"; };
 		5D6589BB3BE6C12068DF3A2A /* Pods_TLProgressSpring_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLProgressSpring_Swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */,
+				491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */,
+				491061C01CF4623A00AD4B5A /* TLCircleController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -108,6 +116,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				491061BE1CF44C9E00AD4B5A /* ColorUtil.swift */,
 			);
 			name = "Example for TLProgressSpring-Swift";
 			path = "TLProgressSpring-Swift";
@@ -319,7 +328,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				491061C11CF4623A00AD4B5A /* TLCircleController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				491061BD1CF3FC8C00AD4B5A /* TLNavProgressController.swift in Sources */,
+				491061BF1CF44C9E00AD4B5A /* ColorUtil.swift in Sources */,
 				49589B6A1CF2CF9800E1C001 /* TLActivityIndicatorController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

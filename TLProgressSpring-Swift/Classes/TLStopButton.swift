@@ -32,10 +32,11 @@ public class TLStopButton: UIButton {
      
      - returns:
      */
-    init(compleationHandler:CompletionHandler){
-        self.compleationBlock = compleationHandler
-        self.init();
+   public convenience init(compleationHandler:CompletionHandler){
+        self.init(frame: CGRectZero)
+       self.compleationBlock = compleationHandler
     }
+    
     
     
     public override init(frame: CGRect) {
@@ -85,7 +86,7 @@ public class TLStopButton: UIButton {
     public func frameThatFits(parentSize:CGRect) -> CGRect{
         let sizeValue = min(parentSize.size.width, parentSize.size.height)
         let viewSize = CGSizeMake(sizeValue, sizeValue)
-        var insetSizeRatio = (1-self.sizeRadio!) / 2;
+        let insetSizeRatio = (1-self.sizeRadio!) / 2;
         
         let originX = parentSize.origin.x + (parentSize.size.width - viewSize.width)/2
         let originY = parentSize.origin.y + (parentSize.size.height-viewSize.height)/2;
