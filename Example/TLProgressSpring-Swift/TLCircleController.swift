@@ -27,8 +27,7 @@ class TLCircleController: UIViewController {
         
         circleProgress = TLCircleProgressView(frame: rect)
         self.view.addSubview(circleProgress)
-        circleProgress.animationDuration = 1
-        circleProgress.setProgressAnimator(0.9, animated: true)
+        circleProgress.animationDuration=1
         
         
         rect = CGRectMake(30, CGRectGetMaxY(circleProgress.frame)+20, ScreenWIDTH-30*2, 40)
@@ -39,17 +38,16 @@ class TLCircleController: UIViewController {
         button.addTarget(self, action: #selector(changeValue(_:)), forControlEvents:.TouchUpInside)
         self.view.addSubview(button)
         
-        
     }
     
     
     func changeValue(sender:AnyObject) -> Void {
-        if(progress==1){
-            progress=0
+        if(progress==0){
+            progress=1
         }else{
-            progress=1;
+            progress=0;
         }
-        
-        circleProgress.setProgressAnimator(progress, animated: true)
+        circleProgress.progress(progress)
+        //circleProgress.setProgressAnimator(progress, animated: true)
     }
 }

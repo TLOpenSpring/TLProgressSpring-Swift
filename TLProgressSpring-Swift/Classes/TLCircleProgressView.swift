@@ -32,12 +32,8 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
      */
     var valuelb:UILabel?
     
-    var progress:CGFloat = 0{
-        didSet{
-            stopAniation()
-            updateProgress()
-        }
-    }
+    var progress:CGFloat = 0
+
     /// 动画时间
    public var animationDuration:CFTimeInterval = 0.3
 
@@ -124,13 +120,12 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
     
     func animatedToPress(progress:Float) -> Void {
         self.stopAniation()
-        
        
-        
         let animation:CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = self.animationDuration
-        animation.fromValue = self.progress
+        animation.fromValue = Float(self.progress)
         animation.toValue = progress
+        animation.delegate=self;
         animation.removedOnCompletion=false
         animation.fillMode = kCAFillModeForwards
         self.shapeLayer.addAnimation(animation, forKey: TLCircularProgressViewProgressAnimationKey)
@@ -140,12 +135,14 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         //增加timer更新value标签的值
         let timeInteval:CFTimeInterval = self.animationDuration/abs(Double(self.valueLabelProgressPercentDifference!))
         
-        self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(timeInteval, target: self, selector: #selector(updateShowValue(_:)), userInfo: nil, repeats: true)
-        
+         self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(timeInteval, target: self, selector: #selector(updateShowValue(_:)), userInfo: nil, repeats: true)
          self.progress = CGFloat(progress)
-    }
+        
+        
+     }
     
     func updateShowValue(timer:NSTimer) -> Void {
+        
         if(valueLabelProgressPercentDifference > 0){
             valueLabelProgressPercentDifference=valueLabelProgressPercentDifference!-1 ;
             
@@ -153,13 +150,20 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
             valueLabelProgressPercentDifference=valueLabelProgressPercentDifference!+1;
         }
         
-        
         let result:Float = Float(self.valueLabelProgressPercentDifference!)/100
         let floatProgress:Float = Float(self.progress)
         self.updateValueLb(floatProgress - result)
+        
+      
     }
     
     //MARK: - 更新进度条
+    
+    public func progress(progress:Float) -> Void {
+        self.progress = CGFloat(progress)
+        stopAniation()
+        updateProgress()
+    }
     
     public override func setProgressAnimator(progress: Float, animated: Bool) {
         if(animated){
@@ -169,6 +173,7 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
             self.animatedToPress(progress);
         }else{
             self.progress = CGFloat(progress);
+            self.updateProgress()
         }
     }
     
