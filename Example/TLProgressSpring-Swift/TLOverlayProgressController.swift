@@ -10,11 +10,13 @@ import UIKit
 import TLProgressSpring_Swift
 
 
-class TLOverlayProgressController: UIViewController {
+public class TLOverlayProgressController: UIViewController {
     
     var overlayProgress:TLOverlayProgressView!
     
-    override func viewDidLoad() {
+   public var mode:TLMode = .ActivityIndeterminate
+    
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor=UIColor.whiteColor()
         initView()
@@ -28,24 +30,63 @@ class TLOverlayProgressController: UIViewController {
     
     
     func show() {
-        self.overlayProgress.showAnimated(true)
+        switch mode {
+        case .ActivityIndeterminate:
+            overlayProgress.showAnimated(true)
+        case .DeterminateCircular:
+            overlayProgress.showAnimated(true)
+        default:
+            break;
+        }
+        
         performBlock(2) {
             self.overlayProgress.hideAnimated(true)
         }
+        
     }
     
     func initView() -> Void {
-        overlayProgress = TLOverlayProgressView(parentView: self.view, animated: true)
-      
+        
+        switch mode {
+            
+        case .ActivityIndeterminate:
+            overlayProgress = TLOverlayProgressView(parentView: self.view, animated: true, title: "loading");
+             overlayProgress.showAnimated(true)
+            break
+        case .DeterminateCircular:
+            overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loading", modeValue: .DeterminateCircular, animated: true, stopBlock: { (progressView) in
+                
+                self.overlayProgress.hideAnimated(true)
+            });
+            
+            overlayProgress.setProgress(1, animated: true)
+            break;
+            
+        default:
+            break;
+            
+        }
+        
+        
+       
         
         performBlock(2) { 
-            self.overlayProgress.hideAnimated(true)
+           self.overlayProgress.hideAnimated(true)
         }
+        
+      
+     
     }
     
     func performBlock(delay:NSTimeInterval,completionHander:()->()) -> Void {
         let time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(delay) * Int64(NSEC_PER_SEC));
         dispatch_after(time, dispatch_get_main_queue(), completionHander);
+    }
+    
+    
+    
+    func showIndicator() -> Void {
+        
     }
     
 }

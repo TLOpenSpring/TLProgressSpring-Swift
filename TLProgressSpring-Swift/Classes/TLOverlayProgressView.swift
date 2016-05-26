@@ -52,14 +52,10 @@ public class TLOverlayProgressView: UIView {
     let TLProgressOverlayViewCornerRadius:CGFloat = 7;
     let TLProgressOverlayViewMotionEffectExtent = 10;
     let TLProgressOverlayViewObservationContext:String = "TLProgressOverlayViewObservationContext";
-    var mode:TLMode! = .ActivityIndeterminate{
+   public var mode:TLMode! {
+    
         didSet{
-         hideModeView(modeView)
-            showModeView(modeView)
-            if(!self.hidden){
-                //重新布局
-              manualLayoutSubviews()
-            }
+            //这里的代码执行不了，不知道为什么，难道枚举的观察器不好使
         }
     }
     /// 弹出的对话框
@@ -107,21 +103,34 @@ public class TLOverlayProgressView: UIView {
     //var progressView = TLOverlayProgressView(frame: CGRectZero);
     
     
-    self.mode = modeValue
+    self.mode = modeValue!
+    
     self.titleLb?.text=title
     self.stopBlock = stopBlock
     parentView.addSubview(self)
     
     self.showAnimated(animated!)
     
- 
+    //=======每当改变Mode枚举时，执行下面的改变=============
     
-   
+    self.createModeView()
+    hideModeView(modeView)
+    showModeView(modeView)
     
+    if(!self.hidden){
+        //重新布局
+        manualLayoutSubviews()
+    }
+    //=====================
+
     }
     
     public convenience init(parentView: UIView,animated:Bool) {
         self.init(parentView:parentView,title:"",modeValue:TLMode.ActivityIndeterminate,animated: animated,stopBlock: nil);
+    }
+    
+    public convenience init(parentView: UIView,animated:Bool,title:String) {
+        self.init(parentView:parentView,title:title,modeValue:TLMode.ActivityIndeterminate,animated: animated,stopBlock: nil);
     }
     public convenience init(parentView: UIView,animated:Bool,title:String,mode:TLMode) {
         self.init(parentView:parentView,title:title,modeValue:mode,animated: animated,stopBlock: nil);
@@ -130,6 +139,7 @@ public class TLOverlayProgressView: UIView {
 
     
    override init(frame: CGRect) {
+    self.mode = .ActivityIndeterminate
         super.init(frame: frame)
        initView()
     }
@@ -165,7 +175,6 @@ public class TLOverlayProgressView: UIView {
         dialogView.addSubview(titleLb!)
         
         
-        createModeView()
         
         tintColorDidChange()
         
@@ -391,6 +400,8 @@ public class TLOverlayProgressView: UIView {
         var paddingModel = TLPaddingModel()
         if(self.mode == TLMode.ActivityIndeterminate){
           laytoutActivityIndeterminate(paddingModel)
+        }else if(self.mode == TLMode.DeterminateCircular){
+            layoutDeterminateCircular(paddingModel);
         }
         
         if(!CGRectEqualToRect(blurView.frame, dialogView.frame)){
@@ -424,8 +435,10 @@ public class TLOverlayProgressView: UIView {
             self.titleLb!.frame=CGRectMake(0, 10, self.dialogView.frame.size.width, 20);
         }
         
-
-        
+    }
+    
+    func layoutDeterminateCircular(paddingModel:TLPaddingModel) -> Void {
+        laytoutActivityIndeterminate(paddingModel);
     }
     
    

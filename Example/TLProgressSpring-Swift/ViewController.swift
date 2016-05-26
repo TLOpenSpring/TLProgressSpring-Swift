@@ -20,7 +20,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return ["普通转轮",
                 "导航栏进度条",
                 "圆环进度条",
-                "带有遮罩层-默认"];
+                "带有遮罩层-默认",
+                "带有遮罩层-圆环"];
     }
     
 
@@ -73,6 +74,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 3:
             vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .ActivityIndeterminate
+            
+        case 4:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .DeterminateCircular
         default:
             break;
         }
