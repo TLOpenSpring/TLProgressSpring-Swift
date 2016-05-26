@@ -25,7 +25,7 @@ class TLNavProgressController: UIViewController {
     func initView() -> Void {
         navProgrss = TLNavProgressView.progressViewforNavigationController(self.navigationController!);
         navProgrss.progressTintColor=UIColor.redColor()
-        navProgrss.setProgressAnimator(0, animated: true)
+        navProgrss.setProgress(0, animated: true)
         var rect = CGRectMake(30, 100, ScreenWIDTH-30*2, 40)
         var button:UIButton=UIButton(frame: rect)
         button.setTitle("点击增加进度", forState: .Normal)
@@ -51,7 +51,7 @@ class TLNavProgressController: UIViewController {
             progress=0;
         }
         
-        navProgrss.setProgressAnimator(progress, animated: true)
+        navProgrss.setProgress(progress, animated: true)
     }
     func chanageClick(sender:AnyObject) -> Void {
         navProgrss.progressTintColor = UIColor().randomColor()

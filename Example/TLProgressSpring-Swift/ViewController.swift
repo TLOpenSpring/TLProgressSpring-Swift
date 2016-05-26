@@ -17,7 +17,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     var tableview:UITableView?
     var arrayData:Array<String>{
-        return ["普通转轮","导航栏进度条","圆环进度条"];
+        return ["普通转轮",
+                "导航栏进度条",
+                "圆环进度条",
+                "带有遮罩层-默认"];
     }
     
 
@@ -68,6 +71,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         case 2:
             vc=TLCircleController()
             break
+        case 3:
+            vc = TLOverlayProgressController()
         default:
             break;
         }

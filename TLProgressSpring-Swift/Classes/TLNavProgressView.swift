@@ -183,7 +183,7 @@ public class TLNavProgressView: TLProgressView {
     }
     
     //MARK: - 进度条设置+动画
-    public override func setProgressAnimator(progress: Float, animated: Bool) {
+    public override func setProgress(prgressValue: Float, animated: Bool) {
         if(animated){
             if(progress>0 && progress<1 && self.tlProgressView?.alpha < 0){
              self.tlProgressView?.alpha=1
@@ -199,16 +199,16 @@ public class TLNavProgressView: TLProgressView {
             
             if(progress>self.progress || self.progress>=1){
              UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut, animations: {
-                self.progress = progress
+                self.progress = prgressValue
                 }, completion: completion)
             }else{
              UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .CurveLinear, animations: {
-                 self.progress=progress
+                 self.progress=prgressValue
                 }, completion: completion)
             }
             
         }else{
-          self.progress = progress
+          self.progress = prgressValue
         }
     }
 }

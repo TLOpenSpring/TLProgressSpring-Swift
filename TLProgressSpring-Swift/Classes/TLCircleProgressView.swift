@@ -165,17 +165,19 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         updateProgress()
     }
     
-    public override func setProgressAnimator(progress: Float, animated: Bool) {
+    public override func setProgress(prgressValue: Float, animated: Bool){
         if(animated){
             if((abs(self.progress-CGFloat(progress)) < 0)){
-              return;
+                return;
             }
-            self.animatedToPress(progress);
+            self.animatedToPress(prgressValue);
         }else{
             self.progress = CGFloat(progress);
             self.updateProgress()
         }
     }
+    
+    
     
     func updateProgress() -> Void {
         updatePath()

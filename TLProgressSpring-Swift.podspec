@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-"进度条提示框工具，API简单易用，可以在导航栏上显示，也可以弹出一个转轮来显示，支持点击关闭；支持显示百分比，动画效果简单优雅"
+  "进度条提示框工具，API简单易用，可以在导航栏上显示，也可以弹出一个转轮来显示，支持点击关闭；支持显示百分比，动画效果简单优雅"
                        DESC
 
   s.homepage         = 'https://github.com/TLOpenSpring/TLProgressSpring-Swift'

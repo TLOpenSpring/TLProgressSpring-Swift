@@ -10,6 +10,7 @@
 		491061BD1CF3FC8C00AD4B5A /* TLNavProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */; };
 		491061BF1CF44C9E00AD4B5A /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061BE1CF44C9E00AD4B5A /* ColorUtil.swift */; };
 		491061C11CF4623A00AD4B5A /* TLCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491061C01CF4623A00AD4B5A /* TLCircleController.swift */; };
+		4929B7701CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */; };
 		49589B6A1CF2CF9800E1C001 /* TLActivityIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */; };
 		49589B6C1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLNavProgressController.swift; sourceTree = "<group>"; };
 		491061BE1CF44C9E00AD4B5A /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
 		491061C01CF4623A00AD4B5A /* TLCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCircleController.swift; sourceTree = "<group>"; };
+		4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLOverlayProgressController.swift; sourceTree = "<group>"; };
 		49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLActivityIndicatorController.swift; sourceTree = "<group>"; };
 		49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TLProgressSpring_Swift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/TLProgressSpring-Swift-fgftvqsgtrfbzgcfesubccvqomnj/Build/Products/Debug-iphoneos/TLProgressSpring_Swift.framework"; sourceTree = "<group>"; };
 		5D6589BB3BE6C12068DF3A2A /* Pods_TLProgressSpring_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLProgressSpring_Swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 				49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */,
 				491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */,
 				491061C01CF4623A00AD4B5A /* TLCircleController.swift */,
+				4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4929B7701CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				491061C11CF4623A00AD4B5A /* TLCircleController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
