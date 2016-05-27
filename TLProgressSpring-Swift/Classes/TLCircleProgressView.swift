@@ -33,6 +33,7 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
     var valuelb:UILabel?
     
     var progress:CGFloat = 0
+    
 
     /// 动画时间
    public var animationDuration:CFTimeInterval = 0.3
@@ -78,7 +79,6 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         numberFormatter.locale = NSLocale.currentLocale()
         
        
-        
         shapeLayer = CAShapeLayer()
         shapeLayer.fillColor=UIColor.clearColor().CGColor
         self.layer.addSublayer(shapeLayer)
@@ -98,7 +98,6 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         self.addSubview(stopButton)
         self.mayStop=false
         tintColorDidChange()
-        
     }
     
     //MARK: - tintColorDidChange
@@ -113,7 +112,7 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
     
     //MARK: - 动画
     func stopAniation() -> Void {
-        self.layer.removeAnimationForKey(TLCircularProgressViewProgressAnimationKey)
+        self.shapeLayer.removeAnimationForKey(TLCircularProgressViewProgressAnimationKey)
         self.updateTimer?.invalidate()
         self.updateTimer = nil
     }
@@ -130,36 +129,16 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         animation.fillMode = kCAFillModeForwards
         self.shapeLayer.addAnimation(animation, forKey: TLCircularProgressViewProgressAnimationKey)
         
+
         
-        valueLabelProgressPercentDifference = (Int(progress)-Int(self.progress))*100
-        //增加timer更新value标签的值
-        let timeInteval:CFTimeInterval = self.animationDuration/abs(Double(self.valueLabelProgressPercentDifference!))
-        
-         self.updateTimer = NSTimer.scheduledTimerWithTimeInterval(timeInteval, target: self, selector: #selector(updateShowValue(_:)), userInfo: nil, repeats: true)
-         self.progress = CGFloat(progress)
-        
-        
-     }
+        self.updateValueLb(progress)
     
-    func updateShowValue(timer:NSTimer) -> Void {
-        
-        if(valueLabelProgressPercentDifference > 0){
-            valueLabelProgressPercentDifference=valueLabelProgressPercentDifference!-1 ;
-            
-        }else{
-            valueLabelProgressPercentDifference=valueLabelProgressPercentDifference!+1;
-        }
-        
-        let result:Float = Float(self.valueLabelProgressPercentDifference!)/100
-        let floatProgress:Float = Float(self.progress)
-        self.updateValueLb(floatProgress - result)
-        
-      
-    }
+        self.progress = CGFloat(progress)
+     }
+
     
     //MARK: - 更新进度条
-    
-    public func progress(progress:Float) -> Void {
+    public func setCurrentProgress(progress:Float) -> Void {
         self.progress = CGFloat(progress)
         stopAniation()
         updateProgress()
@@ -172,9 +151,10 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
             }
             self.animatedToPress(prgressValue);
         }else{
-            self.progress = CGFloat(progress);
-            self.updateProgress()
+            setCurrentProgress(prgressValue);
         }
+        
+
     }
     
     
@@ -185,7 +165,11 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
     }
     
     func updatePath() -> Void {
+
+        self.shapeLayer.strokeStart = 0;
         self.shapeLayer.strokeEnd = self.progress
+        print("self.shapeLayer.strokeStart:\(self.shapeLayer.strokeStart);self.shapeLayer.strokeEnd:\(self.shapeLayer.strokeEnd);")
+        
     }
     
     func updateValueLb(progress:Float) -> Void {
@@ -207,6 +191,8 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         self.layer.cornerRadius = self.frame.size.width/2
         
         self.shapeLayer.path=layoutPath().CGPath
+    
+        
         self.stopButton.frame = (self.stopButton as! TLStopButton).frameThatFits(self.bounds)
     }
     

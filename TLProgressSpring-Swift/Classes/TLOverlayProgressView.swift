@@ -52,7 +52,7 @@ public class TLOverlayProgressView: UIView {
     let TLProgressOverlayViewCornerRadius:CGFloat = 7;
     let TLProgressOverlayViewMotionEffectExtent = 10;
     let TLProgressOverlayViewObservationContext:String = "TLProgressOverlayViewObservationContext";
-   public var mode:TLMode! {
+    var mode:TLMode! {
     
         didSet{
             //这里的代码执行不了，不知道为什么，难道枚举的观察器不好使
@@ -64,7 +64,7 @@ public class TLOverlayProgressView: UIView {
     var blurView:UIView!
     var blurMaskView:UIView?
     /// 进度条的值
-    var progress:CGFloat=0
+    public var progress:CGFloat = 0
     /// 进度条的标题
     var titleLb:UILabel?
     var isShowPercent:Bool=false
@@ -103,26 +103,15 @@ public class TLOverlayProgressView: UIView {
     //var progressView = TLOverlayProgressView(frame: CGRectZero);
     
     
-    self.mode = modeValue!
-    
+    self.mode=modeValue!
+    self.createModeView()
     self.titleLb?.text=title
     self.stopBlock = stopBlock
     parentView.addSubview(self)
     
     self.showAnimated(animated!)
+    manualLayoutSubviews()
     
-    //=======每当改变Mode枚举时，执行下面的改变=============
-    
-    self.createModeView()
-    hideModeView(modeView)
-    showModeView(modeView)
-    
-    if(!self.hidden){
-        //重新布局
-        manualLayoutSubviews()
-    }
-    //=====================
-
     }
     
     public convenience init(parentView: UIView,animated:Bool) {
@@ -195,6 +184,19 @@ public class TLOverlayProgressView: UIView {
         modeView.tintColor = self.tintColor
     
         return modeView
+    }
+    
+   public func setMode(mode:TLMode) -> Void {
+        self.mode=mode
+    //=======每当改变Mode枚举时，执行下面的改变=============
+    self.createModeView()
+    hideModeView(modeView)
+    showModeView(modeView)
+    if(!self.hidden){
+        //重新布局
+        manualLayoutSubviews()
+    }
+    //=====================
     }
     
     func createViewForMode(mode:TLMode) -> UIView {
@@ -290,8 +292,6 @@ public class TLOverlayProgressView: UIView {
     }
     
     func applyProgressAnimated(animated:Bool) -> Void {
-        let btn = UIButton()
-        
     
         if(self.modeView.respondsToSelector(#selector(setProgress(_:animated:)))){
             (self.modeView as AnyObject).setProgress(Float(self.progress), animated: animated);

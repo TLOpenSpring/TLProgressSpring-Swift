@@ -19,7 +19,7 @@ class TLNavProgressController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor=UIColor.whiteColor()
-         initView()
+        initView()
     }
     
     func initView() -> Void {

@@ -30,18 +30,25 @@ public class TLOverlayProgressController: UIViewController {
     
     
     func show() {
+        
+        
         switch mode {
         case .ActivityIndeterminate:
             overlayProgress.showAnimated(true)
+            performBlock(2) {
+                self.overlayProgress.hideAnimated(true)
+            }
+            break;
         case .DeterminateCircular:
             overlayProgress.showAnimated(true)
+            simulateProgress(overlayProgress);
+          
+            break;
         default:
             break;
         }
         
-        performBlock(2) {
-            self.overlayProgress.hideAnimated(true)
-        }
+       
         
     }
     
@@ -54,12 +61,11 @@ public class TLOverlayProgressController: UIViewController {
              overlayProgress.showAnimated(true)
             break
         case .DeterminateCircular:
-            overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loading", modeValue: .DeterminateCircular, animated: true, stopBlock: { (progressView) in
-                
+            showDeterminateCircular()
+            performBlock(2) {
                 self.overlayProgress.hideAnimated(true)
-            });
-            
-            overlayProgress.setProgress(1, animated: true)
+                self.overlayProgress.setProgress(0, animated: true)
+            }
             break;
             
         default:
@@ -70,22 +76,62 @@ public class TLOverlayProgressController: UIViewController {
         
        
         
-        performBlock(2) { 
-           self.overlayProgress.hideAnimated(true)
-        }
+       
         
       
      
     }
     
     func performBlock(delay:NSTimeInterval,completionHander:()->()) -> Void {
-        let time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(delay) * Int64(NSEC_PER_SEC));
-        dispatch_after(time, dispatch_get_main_queue(), completionHander);
+        
+        let popTime = dispatch_time(DISPATCH_TIME_NOW,
+                                    Int64(delay * Double(NSEC_PER_SEC))) // 1
+        
+        
+        dispatch_after(popTime, dispatch_get_main_queue(), completionHander);
     }
     
     
     
     func showIndicator() -> Void {
+        
+    }
+    
+    
+    func showDeterminateCircular() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loading", modeValue: .DeterminateCircular, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
+        
+         self.overlayProgress.setProgress(1, animated: true)
+    }
+    
+    func simulateProgress(progressView:TLOverlayProgressView) -> Void {
+        progressView.showAnimated(true)
+       
+        self.performBlock(1.4) {
+            progressView.setProgress(0.2, animated: true)
+            self.performBlock(0.5, completionHander: {
+                 progressView.setProgress(0.4, animated: true)
+                self.performBlock(0.5, completionHander: {
+                    progressView.setProgress(0.6, animated: true)
+                    self.performBlock(0.5, completionHander: {
+                        progressView.setProgress(0.7, animated: true)
+                        self.performBlock(0.5, completionHander: {
+                            progressView.setProgress(0.9, animated: true)
+                            self.performBlock(0.5, completionHander: {
+                                progressView.setProgress(1.0, animated: true)
+                                progressView.progress=0;
+                                self.performBlock(0.5, completionHander: {
+                                    progressView.hideAnimated(true)
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        }
         
     }
     
