@@ -21,7 +21,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "导航栏进度条",
                 "圆环进度条",
                 "带有遮罩层-默认",
-                "带有遮罩层-圆环"];
+                "带有遮罩层-圆环",
+                "带有遮罩层-水平进度条",
+                "带有遮罩层-苹果自带的转轮",
+                "带有遮罩层-小转轮",
+                "带有遮罩层-小转轮带文字",
+                "带有遮罩层-显示成功图标",
+                "带有遮罩层-显示失败图标",
+                "带有遮罩层-提示文字"];
     }
     
 
@@ -79,6 +86,35 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         case 4:
             vc = TLOverlayProgressController()
             (vc as! TLOverlayProgressController).mode = .DeterminateCircular
+            
+        case 5:
+             vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .HorizontalBar
+            
+        case 6:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .SystemUIActivity
+            
+        case 7:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .IndeterminateSmall
+            
+        case 8:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .IndeterminateSmallAndText
+            
+        case 9:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .CheckmarkIcon
+            
+        case 10:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .CrossIcon
+            
+        case 11:
+            vc = TLOverlayProgressController()
+            (vc as! TLOverlayProgressController).mode = .TipText
+            
         default:
             break;
         }

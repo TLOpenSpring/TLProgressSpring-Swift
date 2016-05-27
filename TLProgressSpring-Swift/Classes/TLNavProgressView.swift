@@ -189,7 +189,6 @@ public class TLNavProgressView: TLProgressView {
              self.tlProgressView?.alpha=1
             }
             
-           // ((finished:Bool)->())
             func completion(finished:Bool){
                 UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseInOut, animations: {
                     self.tlProgressView?.alpha=self.progress>=1 ? 0:1;

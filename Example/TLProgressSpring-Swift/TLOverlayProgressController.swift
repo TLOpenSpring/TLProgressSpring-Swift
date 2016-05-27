@@ -21,7 +21,6 @@ public class TLOverlayProgressController: UIViewController {
         self.view.backgroundColor=UIColor.whiteColor()
         initView()
         
-        
         let showItem = UIBarButtonItem(title: "显示", style: .Plain, target: self, action: #selector(show));
         
         self.navigationItem.rightBarButtonItem=showItem
@@ -30,7 +29,7 @@ public class TLOverlayProgressController: UIViewController {
     
     
     func show() {
-        
+         overlayProgress.showAnimated(true)
         
         switch mode {
         case .ActivityIndeterminate:
@@ -44,11 +43,15 @@ public class TLOverlayProgressController: UIViewController {
             simulateProgress(overlayProgress);
           
             break;
+        case .HorizontalBar:
+            simulateProgress(overlayProgress)
         default:
             break;
         }
         
-       
+        performBlock(2) {
+            self.overlayProgress.hideAnimated(true)
+        }
         
     }
     
@@ -57,28 +60,33 @@ public class TLOverlayProgressController: UIViewController {
         switch mode {
             
         case .ActivityIndeterminate:
-            overlayProgress = TLOverlayProgressView(parentView: self.view, animated: true, title: "loading");
-             overlayProgress.showAnimated(true)
+            showIndicator()
             break
         case .DeterminateCircular:
             showDeterminateCircular()
-            performBlock(2) {
-                self.overlayProgress.hideAnimated(true)
-                self.overlayProgress.setProgress(0, animated: true)
-            }
-            break;
-            
+        case .CheckmarkIcon:
+            showCheckmarkIcon()
+        case .CrossIcon:
+            showCrossIcon()
+        case .SystemUIActivity:
+            showSystemUIActivity()
+        case .HorizontalBar:
+            showHorizontalBar()
+        case .IndeterminateSmall:
+            showIndeterminateSmall("")
+        case .IndeterminateSmallAndText:
+            showIndeterminateSmall("Loading......")
+        case .TipText:
+            showTipText()
         default:
             break;
-            
         }
         
+        performBlock(2) {
+            self.overlayProgress.hideAnimated(true)
+        }
         
-       
-        
-       
-        
-      
+    
      
     }
     
@@ -86,25 +94,70 @@ public class TLOverlayProgressController: UIViewController {
         
         let popTime = dispatch_time(DISPATCH_TIME_NOW,
                                     Int64(delay * Double(NSEC_PER_SEC))) // 1
-        
-        
         dispatch_after(popTime, dispatch_get_main_queue(), completionHander);
     }
     
     
     
     func showIndicator() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loadin...", modeValue: .ActivityIndeterminate, animated: true
+            , stopBlock: { (progressView) in
+                progressView.hideAnimated(true)
+        })
+        overlayProgress.showAnimated(true)
+    }
+    
+    func showSystemUIActivity() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "Loading...", modeValue: TLMode.SystemUIActivity, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
+    }
+    
+    func showCrossIcon() -> Void {
         
     }
     
+    func showCheckmarkIcon() -> Void {
+        
+    }
     
-    func showDeterminateCircular() -> Void {
-        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loading", modeValue: .DeterminateCircular, animated: true, stopBlock: { (progressView) in
+    func showHorizontalBar() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "Loading...", modeValue: TLMode.HorizontalBar, animated: true, stopBlock: { (progressView) in
             self.overlayProgress.hideAnimated(true)
         });
         overlayProgress.showAnimated(true)
         
-         self.overlayProgress.setProgress(1, animated: true)
+        simulateProgress(overlayProgress)
+    }
+    
+    func showIndeterminateSmall(text:String) -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title:text, modeValue: TLMode.IndeterminateSmall, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
+    }
+    
+    func showTipText() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title:"全国领先的短租平台", modeValue: TLMode.TipText, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
+    }
+    
+    
+    func showDeterminateCircular() -> Void {
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "Loading...", modeValue: .DeterminateCircular, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
+        
+        self.overlayProgress.setProgress(1, animated: true)
+        
+        performBlock(2) {
+            self.overlayProgress.hideAnimated(true)
+            self.overlayProgress.setProgress(0, animated: true)
+        }
     }
     
     func simulateProgress(progressView:TLOverlayProgressView) -> Void {
@@ -122,9 +175,10 @@ public class TLOverlayProgressController: UIViewController {
                             progressView.setProgress(0.9, animated: true)
                             self.performBlock(0.5, completionHander: {
                                 progressView.setProgress(1.0, animated: true)
-                                progressView.progress=0;
+                             
                                 self.performBlock(0.5, completionHander: {
                                     progressView.hideAnimated(true)
+                                       progressView.setProgress(0, animated: false)
                                 })
                             })
                         })

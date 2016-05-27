@@ -129,7 +129,6 @@ public class TLCircleProgressView: TLProgressView,TLSTOPProtocol {
         animation.fillMode = kCAFillModeForwards
         self.shapeLayer.addAnimation(animation, forKey: TLCircularProgressViewProgressAnimationKey)
         
-
         
         self.updateValueLb(progress)
     

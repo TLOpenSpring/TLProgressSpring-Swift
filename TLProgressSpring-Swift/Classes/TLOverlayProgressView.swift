@@ -9,8 +9,16 @@
 import UIKit
 import TLProgressSpring_Swift
 
+let TLScreenWIDTH = UIScreen.mainScreen().bounds.size.width
+let TLScreenHEIGH = UIScreen.mainScreen().bounds.size.height
+
 /// 创建一个闭包->可以点击停止的回调函数
 public typealias TLStopBlock = ((progressView:TLOverlayProgressView)->())
+
+let HorizontalBarHeight:CGFloat = 45
+let TLSmallIndicatorHeight:CGFloat = 35
+let TLTitleLbHeight:CGFloat = 20
+let TLTextTipHeight:CGFloat =  60
 
 public enum TLMode:Int {
     /**
@@ -29,6 +37,10 @@ public enum TLMode:Int {
      *  显示一个小尺寸的TLAcitivityIndicator
      */
     case IndeterminateSmall
+    /**
+     *  显示一个小尺寸的TLAcitivityIndicator并且带有文字
+     */
+    case IndeterminateSmallAndText
     /**
      *  显示苹果系统自带的UIActivityIndicator
      */
@@ -64,7 +76,7 @@ public class TLOverlayProgressView: UIView {
     var blurView:UIView!
     var blurMaskView:UIView?
     /// 进度条的值
-    public var progress:CGFloat = 0
+    var progress:CGFloat = 0
     /// 进度条的标题
     var titleLb:UILabel?
     var isShowPercent:Bool=false
@@ -99,8 +111,6 @@ public class TLOverlayProgressView: UIView {
    public convenience init(parentView: UIView,title:String?,modeValue:TLMode?,animated:Bool?,stopBlock:TLStopBlock?) {
     
      self.init(frame: CGRectZero);
-    
-    //var progressView = TLOverlayProgressView(frame: CGRectZero);
     
     
     self.mode=modeValue!
@@ -164,7 +174,6 @@ public class TLOverlayProgressView: UIView {
         dialogView.addSubview(titleLb!)
         
         
-        
         tintColorDidChange()
         
     }
@@ -183,9 +192,36 @@ public class TLOverlayProgressView: UIView {
         self.modeView = createViewForMode(self.mode)
         modeView.tintColor = self.tintColor
     
+        //创建停止按钮的响应链
+        let isResponseSelector = modeView.respondsToSelector(#selector(stopButton));
+        let isConformsToProtocol = modeView.conformsToProtocol(TLSTOPProtocol);
+        
+        if(isConformsToProtocol && isConformsToProtocol){
+            
+            if let stopBtn = (modeView as! TLSTOPProtocol).stopButton{
+              stopBtn!.addTarget(self, action:#selector(modeViewStopButtonClick(_:)), forControlEvents: .TouchUpInside);
+            }
+            
+        }
+        
         return modeView
     }
     
+    
+    func stopButton() -> Void {
+        
+    }
+    /**
+     点击停止按钮
+     
+     - parameter btn:
+     */
+    func modeViewStopButtonClick(btn:UIButton) -> Void {
+        if let stopHandler = stopBlock{
+            stopHandler(progressView:self);
+        }
+    
+    }
    public func setMode(mode:TLMode) -> Void {
         self.mode=mode
     //=======每当改变Mode枚举时，执行下面的改变=============
@@ -262,7 +298,6 @@ public class TLOverlayProgressView: UIView {
         if(view.respondsToSelector(#selector(stopAnimating))){
             view.performSelector(#selector(stopAnimating));
         }
-        
     }
     /**
      虚拟方法，会调用集成TLprogressView子类的方法
@@ -402,6 +437,16 @@ public class TLOverlayProgressView: UIView {
           laytoutActivityIndeterminate(paddingModel)
         }else if(self.mode == TLMode.DeterminateCircular){
             layoutDeterminateCircular(paddingModel);
+        }else if(self.mode == TLMode.CheckmarkIcon || self.mode == TLMode.CrossIcon){
+           layoutIcon(paddingModel)
+        }else if(mode == TLMode.HorizontalBar){
+            layoutHorizontalBar(paddingModel);
+        }else if(mode == TLMode.IndeterminateSmall||mode == TLMode.IndeterminateSmallAndText){
+          layoutIndeterminateSmall(paddingModel)
+        }else if(mode == TLMode.SystemUIActivity){
+           layoutSystemUIActivity(paddingModel)
+        }else if(mode == TLMode.TipText){
+          layoutTipText(paddingModel)
         }
         
         if(!CGRectEqualToRect(blurView.frame, dialogView.frame)){
@@ -423,8 +468,6 @@ public class TLOverlayProgressView: UIView {
         innerRect = TLCenterCGSizeInCGRect(innserSize, outerRect: self.bounds)
         dialogView.frame=innerRect
         
-        print("dialogView.frame\(dialogView.frame)")
-        
         //2.设置ModeView
         let innerViewWidth:CGFloat = paddingModel.dialogMinWidth - 2*paddingModel.modePadding
         let y = dialogView.frame.size.height/2 - innerViewWidth/2
@@ -439,6 +482,91 @@ public class TLOverlayProgressView: UIView {
     
     func layoutDeterminateCircular(paddingModel:TLPaddingModel) -> Void {
         laytoutActivityIndeterminate(paddingModel);
+    }
+    
+    func layoutIcon(paddingModel:TLPaddingModel) -> Void {
+        
+    }
+    
+    func layoutHorizontalBar(paddingModel:TLPaddingModel) -> Void {
+        //1.设置dialogView
+        var width:CGFloat = TLScreenWIDTH-50*2
+        var innerRect:CGRect!
+        var innserSize = CGSizeMake(width, HorizontalBarHeight)
+        innerRect = TLCenterCGSizeInCGRect(innserSize, outerRect: self.bounds)
+        dialogView.frame=innerRect
+         //2.设置ModeView
+        width = dialogView.frame.width - 10*2;
+        let originY = dialogView.frame.height/2;
+        self.modeView.frame=CGRectMake(10, originY, width, 30)
+        self.modeView.backgroundColor=UIColor.redColor()
+        
+        //3.设置标题
+        if(!TLStringUtil.isEmpty(titleLb?.text)){
+            self.modeView.frame = CGRectOffset(self.modeView.frame, 0, 10);
+            self.titleLb!.frame=CGRectMake(0, 5, self.dialogView.frame.size.width, 20);
+        }
+    }
+    
+    func layoutIndeterminateSmall(paddingModel:TLPaddingModel) -> Void {
+        let height = (TLSmallIndicatorHeight-7*2);
+        let  y = TLSmallIndicatorHeight/2-height/2;
+        
+        //1.设置dialogView
+        let innerSize:CGSize = CGSizeMake(paddingModel.dialogMinWidth, TLSmallIndicatorHeight);
+        let innerRect=TLCenterCGSizeInCGRect(innerSize, outerRect: self.bounds);
+        self.dialogView.frame = innerRect;
+        
+        //2.设置modeView
+        self.modeView.frame=CGRectMake(15, y, height, height);
+        
+        //3.设置标题
+        if(!TLStringUtil.isEmpty(titleLb?.text)){
+            let originY=self.dialogView.frame.size.height/2 - TLTitleLbHeight/2;
+            self.titleLb!.frame = CGRectMake(CGRectGetMaxX(self.modeView.frame), originY,self.dialogView.frame.size.width-height-modeView.frame.origin.x, TLTitleLbHeight);
+        }else{
+            //如果没有标题，则重新布局，让dialogView尺寸变小，让modeView尺寸变小
+            //重置dialogView尺寸
+            var smallFrame=self.dialogView.frame;
+            smallFrame.size=CGSizeMake(TLSmallIndicatorHeight, TLSmallIndicatorHeight);
+            var originX=self.superview!.frame.size.width/2 - smallFrame.size.width/2;
+            smallFrame.origin.x=originX;
+            self.dialogView.frame=smallFrame;
+            
+            //重置modeView尺寸
+            smallFrame=self.modeView.frame;
+            originX=self.dialogView.frame.size.width/2 - smallFrame.size.width/2;
+            smallFrame.origin.x=originX;
+            self.modeView.frame=smallFrame;
+        }
+    }
+    
+    func layoutSystemUIActivity(paddingModel:TLPaddingModel) -> Void {
+        layoutIndeterminateSmall(paddingModel)
+    }
+    
+    func layoutTipText(paddingModel:TLPaddingModel) -> Void {
+        //1.设置dialogView
+      
+        let innerSize:CGSize = CGSizeMake(paddingModel.dialogMinWidth,TLTextTipHeight);
+        var  innerRect=TLCenterCGSizeInCGRect(innerSize, outerRect: self.bounds);
+        self.dialogView.frame = innerRect;
+        
+        //2.设置modeView
+        self.modeView.frame=self.dialogView.bounds;
+        
+        //3.设置标题
+        if(!TLStringUtil.isEmpty(self.titleLb!.text)){
+            let gap:CGFloat=10;
+            var originY:CGFloat=0;
+            
+            self.titleLb!.frame=CGRectMake(gap, gap, innerRect.size.width-gap*2, innerRect.size.height-gap*2);
+           self.titleLb?.sizeToFit()
+            
+            originY=self.superview!.frame.size.height/2 - (self.titleLb!.frame.size.height+gap*2)/2;
+            self.dialogView.frame=CGRectMake(self.dialogView.frame.origin.x, originY, self.titleLb!.frame.size.width+gap*2, self.titleLb!.frame.size.height+gap*2);
+            self.modeView.frame=self.dialogView.bounds;
+        }
     }
     
    
