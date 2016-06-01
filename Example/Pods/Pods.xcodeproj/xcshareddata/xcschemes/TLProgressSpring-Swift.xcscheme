@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A20149B7158885AE3E2D139D'
+               BlueprintIdentifier = '05F4EC06D2FB1B66FC75DFA8'
                BlueprintName = 'TLProgressSpring-Swift'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TLProgressSpring_Swift.framework'>

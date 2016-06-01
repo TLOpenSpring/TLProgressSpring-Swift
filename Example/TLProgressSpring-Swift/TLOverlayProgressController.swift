@@ -108,18 +108,24 @@ public class TLOverlayProgressController: UIViewController {
     }
     
     func showSystemUIActivity() -> Void {
-        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "Loading...", modeValue: TLMode.SystemUIActivity, animated: true, stopBlock: { (progressView) in
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "loading", modeValue: TLMode.SystemUIActivity, animated: true, stopBlock: { (progressView) in
             self.overlayProgress.hideAnimated(true)
         });
         overlayProgress.showAnimated(true)
     }
     
     func showCrossIcon() -> Void {
-        
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "", modeValue: TLMode.CrossIcon, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
     }
     
     func showCheckmarkIcon() -> Void {
-        
+        overlayProgress = TLOverlayProgressView(parentView: self.view, title: "成功", modeValue: TLMode.CheckmarkIcon, animated: true, stopBlock: { (progressView) in
+            self.overlayProgress.hideAnimated(true)
+        });
+        overlayProgress.showAnimated(true)
     }
     
     func showHorizontalBar() -> Void {

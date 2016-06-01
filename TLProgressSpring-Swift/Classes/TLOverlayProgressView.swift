@@ -253,6 +253,10 @@ public class TLOverlayProgressView: UIView {
             progress = createCustom()
         case .TipText:
             progress = createTextStyle()
+        case .CrossIcon:
+            progress = createIconStyle(TLMode.CrossIcon)
+        case .CheckmarkIcon:
+            progress = createIconStyle(.CheckmarkIcon)
         default:
              progress=TLActivityIndicatorView()
         }
@@ -270,6 +274,16 @@ public class TLOverlayProgressView: UIView {
     
     func createTextStyle() -> UIView {
         return UIView()
+    }
+    
+    func createIconStyle(mode:TLMode) -> TLIconView{
+        var iconView:TLIconView?
+        if(mode == .CheckmarkIcon){
+         iconView=TLCheckMarkIconView()
+        }else if(mode == .CrossIcon){
+         iconView = TLCrossIconView()
+        }
+        return iconView!
     }
     
     func createHorizontalProgressView() -> UIProgressView {
@@ -373,7 +387,7 @@ public class TLOverlayProgressView: UIView {
     }
     
     public func hideAnimated(animated:Bool){
-     hideAnimated(animated, compleationHander: nil)
+      hideAnimated(animated, compleationHander: nil)
     }
     
     public func hideAnimated(animated:Bool,compleationHander:(()->())?){
@@ -485,7 +499,7 @@ public class TLOverlayProgressView: UIView {
     }
     
     func layoutIcon(paddingModel:TLPaddingModel) -> Void {
-        
+        laytoutActivityIndeterminate(paddingModel)
     }
     
     func layoutHorizontalBar(paddingModel:TLPaddingModel) -> Void {
@@ -544,6 +558,8 @@ public class TLOverlayProgressView: UIView {
     func layoutSystemUIActivity(paddingModel:TLPaddingModel) -> Void {
         layoutIndeterminateSmall(paddingModel)
     }
+    
+   
     
     func layoutTipText(paddingModel:TLPaddingModel) -> Void {
         //1.设置dialogView
