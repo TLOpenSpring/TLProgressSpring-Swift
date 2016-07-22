@@ -13,6 +13,7 @@
 		4929B7701CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */; };
 		49589B6A1CF2CF9800E1C001 /* TLActivityIndicatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */; };
 		49589B6C1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */; };
+		496BA2681D41EF52000C0B89 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496BA2671D41EF52000C0B89 /* NetworkController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLOverlayProgressController.swift; sourceTree = "<group>"; };
 		49589B691CF2CF9800E1C001 /* TLActivityIndicatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLActivityIndicatorController.swift; sourceTree = "<group>"; };
 		49589B6B1CF2D1A900E1C001 /* TLProgressSpring_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TLProgressSpring_Swift.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/TLProgressSpring-Swift-fgftvqsgtrfbzgcfesubccvqomnj/Build/Products/Debug-iphoneos/TLProgressSpring_Swift.framework"; sourceTree = "<group>"; };
+		496BA2671D41EF52000C0B89 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		5D6589BB3BE6C12068DF3A2A /* Pods_TLProgressSpring_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLProgressSpring_Swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* TLProgressSpring-Swift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TLProgressSpring-Swift_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				491061BC1CF3FC8C00AD4B5A /* TLNavProgressController.swift */,
 				491061C01CF4623A00AD4B5A /* TLCircleController.swift */,
 				4929B76F1CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift */,
+				496BA2671D41EF52000C0B89 /* NetworkController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				496BA2681D41EF52000C0B89 /* NetworkController.swift in Sources */,
 				4929B7701CF6E3AE00DBEAC9 /* TLOverlayProgressController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				491061C11CF4623A00AD4B5A /* TLCircleController.swift in Sources */,

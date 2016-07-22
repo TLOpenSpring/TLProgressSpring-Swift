@@ -28,7 +28,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "带有遮罩层-小转轮带文字",
                 "带有遮罩层-显示成功图标",
                 "带有遮罩层-显示失败图标",
-                "带有遮罩层-提示文字"];
+                "带有遮罩层-提示文字",
+                "模拟网络请求"];
     }
     
 
@@ -41,7 +42,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func initTableView() {
-        self.tableview=UITableView(frame: CGRectMake(0, NAVIGATIONHEIGH, ScreenWIDTH, ScreenHEIGH-NAVIGATIONHEIGH))
+        self.tableview=UITableView(frame: CGRectMake(0, 0, ScreenWIDTH, ScreenHEIGH-NAVIGATIONHEIGH))
         self.tableview?.delegate=self
         self.tableview?.dataSource=self
         self.view.addSubview(self.tableview!)
@@ -114,6 +115,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         case 11:
             vc = TLOverlayProgressController()
             (vc as! TLOverlayProgressController).mode = .TipText
+        case 12:
+            vc = NetworkController()
+            
             
         default:
             break;
